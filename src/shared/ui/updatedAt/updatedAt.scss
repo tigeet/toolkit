@@ -1,4 +1,11 @@
 .updatedAt {
+  display: flex;
+  gap: 4px;
+  align-items: center;
   color: #8d96a0;
   font-size: 12px;
+
+  &_empty {
+    font-style: italic;
+  }
 }

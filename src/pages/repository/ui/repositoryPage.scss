@@ -6,13 +6,19 @@
   &-repoInfo {
     display: flex;
     align-items: center;
+    row-gap: 4px;
     justify-content: space-between;
     flex-wrap: wrap;
   }
 
+  &-name {
+    font-size: 24px;
+  }
   &-name,
   &-owner {
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &-repoStats {
@@ -44,6 +50,11 @@
     margin-top: 16px;
     display: flex;
     gap: 32px;
+
+    @media screen and (max-width: 576px) {
+      flex-direction: column;
+      gap: 16px;
+    }
   }
 
   &-description {
@@ -65,6 +76,10 @@
   }
   &-languages {
     width: 200px;
+    flex: 0 0 auto;
+    @media screen and (max-width: 576px) {
+      width: auto;
+    }
   }
 
   &-languagesList {

@@ -18,6 +18,7 @@ import { Repository } from "@entities/repository";
 import { cn } from "@bem-react/classname";
 
 import "./mainPage.scss";
+import { Skeleton } from "@shared/ui/skeleton/skeleton";
 const cl = cn("mainPage");
 
 const MainPage = () => {
@@ -67,16 +68,20 @@ const MainPage = () => {
       />
 
       <div className={cl("list")}>
-        {repositories.map(({ id, name, owner, updatedAt, url, stars }) => (
-          <Repository
-            key={id}
-            owner={owner}
-            name={name}
-            url={url}
-            updatedAt={new Date(updatedAt)}
-            stars={stars}
-          />
-        ))}
+        {areRepositoriesLoading
+          ? Array(PAGE_SIZE)
+              .fill(0)
+              .map((_, i) => <Skeleton key={i} width="100%" height={77} />)
+          : repositories.map(({ id, name, owner, updatedAt, url, stars }) => (
+              <Repository
+                key={id}
+                owner={owner}
+                name={name}
+                url={url}
+                updatedAt={updatedAt}
+                stars={stars}
+              />
+            ))}
       </div>
 
       {!isTotalLoading && (

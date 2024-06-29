@@ -67,7 +67,7 @@ export const fetchPageThunk = createAsyncThunk<
     repos,
     pageInfo: { endCursor, startCursor },
   } = data.search;
-  
+
   return {
     repositories: repos.map(
       (entry: {
@@ -77,7 +77,7 @@ export const fetchPageThunk = createAsyncThunk<
           owner: { login: string };
           start: number;
           url: string;
-          defaultBranchRef: {
+          defaultBranchRef?: {
             target: {
               history: { edges: { node: { committedDate: string } }[] };
             };
@@ -88,7 +88,7 @@ export const fetchPageThunk = createAsyncThunk<
         defaultBranchRef: {},
         owner: entry.repo.owner.login,
         updatedAt:
-          entry.repo.defaultBranchRef.target.history.edges[0].node
+          entry.repo.defaultBranchRef?.target.history.edges[0].node
             .committedDate,
       })
     ),

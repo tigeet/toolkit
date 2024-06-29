@@ -11,9 +11,11 @@ export function formatDate(date: Date | string): string {
   return `${day}.${month}.${year} ${hours}:${minutes}`;
 }
 
-export const debounced = <T>(fn: (value: T) => void) => {
+export const debounced = <T>(
+  fn: (value: T) => void,
+  timeout = 300
+): ((value: T) => void) => {
   let id: number | null = null;
-  const timeout = 300;
   return (args: T) => {
     if (id !== null) clearInterval(id);
 
@@ -21,5 +23,8 @@ export const debounced = <T>(fn: (value: T) => void) => {
   };
 };
 
-export const normalizeSizeProp = (size: string | number) =>
-  typeof size === "string" ? size : `${size}px`;
+export const normalizeSizeProp = (size: string | number | undefined) => {
+  if (typeof size === "string") return size;
+  if (size === undefined) return undefined;
+  return `${size}px`;
+};

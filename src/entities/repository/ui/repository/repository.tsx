@@ -9,7 +9,7 @@ const cl = cn("repository");
 type Props = {
   name: string;
   stars: number;
-  updatedAt: Date;
+  updatedAt?: Date | string;
   owner: string;
   url: string;
 };

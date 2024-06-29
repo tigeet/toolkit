@@ -1,0 +1,25 @@
+.skeleton {
+  display: inline-block;
+  background-color: #0000001c;
+  animation: pulse 2s ease-in-out 0.5s infinite;
+
+  &_variant_circular {
+    border-radius: 100%;
+  }
+
+  &_variant_rounded {
+    border-radius: 4px;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}

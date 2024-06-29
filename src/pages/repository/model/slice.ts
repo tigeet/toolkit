@@ -36,7 +36,7 @@ export const fetchRepositoryThunk = createAsyncThunk<
   const result: RepositoryInfo = {
     stars: data.repository.stars,
     updatedAt:
-      data.repository.defaultBranchRef.target.history.edges[0].node
+      data.repository.defaultBranchRef?.target.history.edges[0].node
         .committedDate,
     avatarUrl: data.repository.owner.avatarUrl,
     ownerUrl: data.repository.owner.url,
