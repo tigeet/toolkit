@@ -59,13 +59,13 @@ export const Pagination = memo(({ page, total, onChange }: Props) => {
       </button>
 
       {displayedValues.map((value) => (
-        <span
+        <button
           className={cl("tag", { selected: value === page })}
           key={value}
           onClick={() => value && handleClick(value)}
         >
           {value}
-        </span>
+        </button>
       ))}
 
       <button

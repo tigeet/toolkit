@@ -1,0 +1,25 @@
+.search {
+  border-radius: 1000px;
+  background-color: hsla(0, 0%, 0%, 0.089);
+  height: 40px;
+  align-items: center;
+  display: flex;
+  padding: 4px 16px;
+  gap: 8px;
+  &_focus {
+    outline: 1px solid rgb(33, 111, 255);
+  }
+
+  &-icon {
+    width: 18px;
+    flex: 0 0 auto;
+    height: 18px;
+    color: hsla(0, 0%, 0%, 0.8);
+  }
+  &-control {
+    height: 100%;
+    flex: 1 1 auto;
+    color: hsla(0, 0%, 0%, 0.8);
+    outline: none;
+  }
+}

@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@shared/model/hooks";
-import { useCallback, useEffect } from "react";
+import { ChangeEvent, useCallback, useEffect } from "react";
 
 import { Pagination } from "@features/pagination";
 import { PAGE_SIZE } from "../const";
@@ -12,6 +12,7 @@ import {
 } from "../model/mainSlice/selector";
 import { setSearch, setPage } from "../model/mainSlice/slice";
 import { selectTotal } from "../model/countSlice/selector";
+import { Search } from "@features/search/ui/search/search";
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
@@ -28,8 +29,8 @@ const MainPage = () => {
   }, [dispatch]);
 
   const handleSearchChange = useCallback(
-    (value: string) => {
-      dispatch(setSearch(value));
+    (event: ChangeEvent<HTMLInputElement>) => {
+      dispatch(setSearch(event.target.value));
       dispatch(fetchRepositoryCount());
       dispatch(fetchPageThunk());
     },
@@ -46,10 +47,7 @@ const MainPage = () => {
 
   return (
     <div>
-      <input
-        value={search}
-        onChange={(e) => handleSearchChange(e.target.value)}
-      />
+      <Search value={search} onChange={handleSearchChange} />
 
       {repositories.map((repo) => (
         <div key={repo.id}>{repo.name}</div>
