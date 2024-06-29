@@ -1,7 +1,6 @@
 .repositoryPage {
   display: flex;
   flex-direction: column;
-  gap: 12px;
   padding: 12px;
 
   &-repoInfo {
@@ -10,10 +9,12 @@
     justify-content: space-between;
     flex-wrap: wrap;
   }
+
   &-name,
   &-owner {
     white-space: nowrap;
   }
+
   &-repoStats {
     display: flex;
     gap: 8px;
@@ -21,6 +22,7 @@
   }
 
   &-ownerInfo {
+    margin-top: 12px;
     display: flex;
     gap: 8px;
     align-items: center;
@@ -35,15 +37,11 @@
     height: 24px;
     border-radius: 50%;
   }
-
-  &-owner {
-    color: #4493f8;
-    &:hover {
-      text-decoration: underline;
-    }
+  &-avatarIcon {
+    color: #8d96a0;
   }
-
   &-main {
+    margin-top: 16px;
     display: flex;
     gap: 32px;
   }

@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { fetchPageThunk } from "./actions";
-import { Repository, State } from "./types";
+import { State } from "./types";
 
 const initialState: State = {
   search: "",

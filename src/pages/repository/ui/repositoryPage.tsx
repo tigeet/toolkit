@@ -1,18 +1,15 @@
 import { useAppDispatch, useAppSelector } from "@shared/model/hooks";
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { fetchRepositoryThunk, reset } from "../model/slice";
 import { selectRepositoryInfo } from "../model/selector";
 import { cn } from "@bem-react/classname";
-
-import { Stars } from "@shared/ui/stars/stars";
-import { UpdatedAt } from "@shared/ui/updatedAt/updatedAt";
+import { LANGAUGES_LIMIT } from "../const";
+import { Dot, Link, UpdatedAt, Stars } from "@shared/ui/";
 import UserIcon from "@shared/assets/user.svg?react";
 
 const cl = cn("repositoryPage");
 import "./repositoryPage.scss";
-import { LANGAUGES_LIMIT } from "../const";
-import { Dot } from "@shared/ui/dot/dot";
 
 const RepositoryPage = () => {
   const { login, name } = useParams();

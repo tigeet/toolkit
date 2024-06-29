@@ -1,7 +1,7 @@
 import { client } from "@app/apollo";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "@app/store";
-import { createQuery } from "../actions";
+import { createQuery } from "../utils";
 import { GET_REPOSITORIES_COUNT } from "@pages/main/api";
 
 export const fetchRepositoryCount = createAsyncThunk<

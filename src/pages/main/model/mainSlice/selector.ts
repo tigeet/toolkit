@@ -1,7 +1,8 @@
 import { RootState } from "@app/store";
-import { createSelector } from "reselect";
-const selectState = (state: RootState) => state.main;
-export const selectRepositories = createSelector(
-  [selectState],
-  (state) => state
-);
+
+export const selectPage = (state: RootState) => state.main.page;
+export const selectPreviousPage = (state: RootState) => state.main.previousPage;
+export const selectRepositoriesLoading = (state: RootState) =>
+  state.main.loading;
+export const selectRepositories = (state: RootState) => state.main.repositories;
+export const selectSearch = (state: RootState) => state.main.search;

@@ -23,6 +23,7 @@ export const GET_CURSOR_WITH_OFFSET = gql`
     }
   }
 `;
+
 export const GET_CURRENT_USER = gql`
   query {
     viewer {

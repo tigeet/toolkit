@@ -10,3 +10,16 @@ export function formatDate(date: Date | string): string {
 
   return `${day}.${month}.${year} ${hours}:${minutes}`;
 }
+
+export const debounced = <T>(fn: (value: T) => void) => {
+  let id: number | null = null;
+  const timeout = 300;
+  return (args: T) => {
+    if (id !== null) clearInterval(id);
+
+    id = setTimeout(() => fn(args), timeout) as unknown as number;
+  };
+};
+
+export const normalizeSizeProp = (size: string | number) =>
+  typeof size === "string" ? size : `${size}px`;
