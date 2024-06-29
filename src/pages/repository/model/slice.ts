@@ -1,23 +1,29 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RepositoryInfo, State } from "./type";
-import { RootState } from "@app/store";
 import { client } from "@app/apollo";
 import { GET_REPOSITORY_INFO } from "../api";
 import { LANGAUGES_LIMIT } from "../const";
 
 const initialState: State = {
   loading: false,
+  name: "",
+  owner: "",
+  repository: {
+    stars: 0,
+    updatedAt: "",
+    ownerUrl: "",
+    avatarUrl: undefined,
+    languages: [],
+    totalLanguages: 0,
+    description: "",
+  },
 };
 
 export const fetchRepositoryThunk = createAsyncThunk<
   RepositoryInfo,
-  undefined,
-  { state: RootState }
->("repository/fetchRepository", async (_, thunkAPI) => {
-  const state = thunkAPI.getState();
-  const owner = state.repository.owner;
-  const name = state.repository.name;
-
+  { owner: string; name: string },
+  object
+>("repository/fetchRepository", async ({ owner, name }) => {
   const { data } = await client.query({
     query: GET_REPOSITORY_INFO,
     variables: {
@@ -32,12 +38,13 @@ export const fetchRepositoryThunk = createAsyncThunk<
     updatedAt:
       data.repository.defaultBranchRef.target.history.edges[0].node
         .committedDate,
-    avatar: data.repository.owner.avatarUrl,
+    avatarUrl: data.repository.owner.avatarUrl,
+    ownerUrl: data.repository.owner.url,
     description: data.repository.description,
     languages: data.repository.languages.nodes.map(
       (node: { name: string }) => node.name
     ),
-    hasExtraLanguages: data.repository.languages.totalCount > LANGAUGES_LIMIT,
+    totalLanguages: data.repository.languages.totalCount,
   };
   return result;
 });
@@ -50,6 +57,9 @@ export const repositorySlice = createSlice({
     },
     setName: (state, action) => {
       state.name = action.payload;
+    },
+    reset: (state) => {
+      Object.assign(state, initialState);
     },
   },
   extraReducers: (builder) => {
@@ -64,4 +74,4 @@ export const repositorySlice = createSlice({
   },
 });
 
-export const { setName, setOwner } = repositorySlice.actions;
+export const { setName, setOwner, reset } = repositorySlice.actions;

@@ -1,15 +1,16 @@
 export type RepositoryInfo = {
   stars: number;
   updatedAt: string;
-  avatar?: string;
+  avatarUrl?: string;
+  ownerUrl: string;
   languages: string[];
-  hasExtraLanguages: boolean;
+  totalLanguages: number;
   description: string;
 };
 
 export type State = {
   loading: boolean;
-  name?: string;
-  owner?: string;
-  repository?: RepositoryInfo;
+  name: string;
+  owner: string;
+  repository: RepositoryInfo;
 };

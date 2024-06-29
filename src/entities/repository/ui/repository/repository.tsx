@@ -1,12 +1,12 @@
 import { memo } from "react";
 import { cn } from "@bem-react/classname";
 import { Link } from "react-router-dom";
-import { formatDate } from "@shared/utils";
 
-import StarIcon from "@shared/assets/star.svg?react";
 import GithubIcon from "@shared/assets/github.svg?react";
 import "./repository.scss";
 import { Dot } from "@shared/ui/dot/dot";
+import { Stars } from "@shared/ui/stars/stars";
+import { UpdatedAt } from "@shared/ui/updatedAt/updatedAt";
 
 const cl = cn("repository");
 
@@ -28,18 +28,17 @@ export const Repository = memo(
           </Link>
           <ul className={cl("stats")}>
             <li className={cl("updatedAt")}>
-              Updated at {formatDate(updatedAt)}
+              <UpdatedAt date={updatedAt} />
             </li>
             <Dot />
             <li className={cl("stars")}>
-              <StarIcon className={cl("starsIcon")} />
-              <span className={cl("starsCount")}>{stars}</span>
+              <Stars count={stars} />
             </li>
           </ul>
         </div>
 
         <div>
-          <Link className={cl("githubLink")} to={url}>
+          <Link className={cl("githubLink")} to={url} target="_blank">
             <GithubIcon className={cl("githubIcon")} />
           </Link>
         </div>

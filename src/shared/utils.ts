@@ -1,4 +1,5 @@
-export function formatDate(date: Date): string {
+export function formatDate(date: Date | string): string {
+  if (typeof date === "string") date = new Date(date);
   const formatInt = (num: number) => (num < 10 ? "0" + num : num);
 
   const day = formatInt(date.getDate());

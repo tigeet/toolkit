@@ -7,10 +7,12 @@
 
   &-info {
     display: flex;
+    align-items: flex-start;
     flex-direction: column;
     flex: 1 1 auto;
     gap: 4px;
   }
+
   &-title {
     font-size: 18px;
     color: #4493f8;
@@ -20,26 +22,15 @@
   }
 
   &-stats {
-    color: #8d96a0;
-    font-size: 12px;
     list-style-type: none;
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  &-stars {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  &-starsIcon {
-    height: 16ppx;
-    width: 16px;
-  }
 
   &-githubIcon {
-    color: hsla(0, 0%, 0%, 0.8);
+    color: #4493f8;
+    // color: hsla(0, 0%, 0%, 0.8);
     height: 16px;
     width: 16px;
   }
@@ -58,7 +49,6 @@
       border-radius: 50%;
     }
     &:hover::before {
-      background-color: red;
       background-color: hsla(0, 0%, 0%, 0.089);
     }
   }

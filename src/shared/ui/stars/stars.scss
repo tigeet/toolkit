@@ -1,0 +1,11 @@
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #8d96a0;
+  font-size: 12px;
+  &-icon {
+    height: 16ppx;
+    width: 16px;
+  }
+}
