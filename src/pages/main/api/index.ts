@@ -44,7 +44,22 @@ export const GET_REPOSITORIES = gql`
             }
             name
             stars: stargazerCount
-            updatedAt
+
+            defaultBranchRef {
+              target {
+                ... on Commit {
+                  history(first: 1) {
+                    edges {
+                      node {
+                        ... on Commit {
+                          committedDate
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

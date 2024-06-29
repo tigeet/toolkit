@@ -1,0 +1,65 @@
+.repository {
+  border-radius: 6px;
+  padding: 16px;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  display: flex;
+
+  &-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    gap: 4px;
+  }
+  &-title {
+    font-size: 18px;
+    color: #4493f8;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &-stats {
+    color: #8d96a0;
+    font-size: 12px;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  &-stars {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &-starsIcon {
+    height: 16ppx;
+    width: 16px;
+  }
+
+  &-githubIcon {
+    color: hsla(0, 0%, 0%, 0.8);
+    height: 16px;
+    width: 16px;
+  }
+
+  &-githubLink {
+    position: relative;
+    &::before {
+      position: absolute;
+      content: "";
+      transition: background-color 0.15s ease;
+      width: 32px;
+      height: 32px;
+      left: -50%;
+      top: -50%;
+      z-index: 1;
+      border-radius: 50%;
+    }
+    &:hover::before {
+      background-color: red;
+      background-color: hsla(0, 0%, 0%, 0.089);
+    }
+  }
+}

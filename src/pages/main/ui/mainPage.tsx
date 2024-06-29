@@ -13,7 +13,10 @@ import {
 import { setSearch, setPage } from "../model/mainSlice/slice";
 import { selectTotal } from "../model/countSlice/selector";
 import { Search } from "@features/search/ui/search/search";
-
+import { Repository } from "@entities/repository/ui/repository/repository";
+import { cn } from "@bem-react/classname";
+import "./mainPage.scss";
+const cl = cn("mainPage");
 const MainPage = () => {
   const dispatch = useAppDispatch();
   const { loading: areRepositoriesLoading, repositories } =
@@ -46,12 +49,21 @@ const MainPage = () => {
   );
 
   return (
-    <div>
+    <main className={cl()}>
       <Search value={search} onChange={handleSearchChange} />
 
-      {repositories.map((repo) => (
-        <div key={repo.id}>{repo.name}</div>
-      ))}
+      <div className={cl("list")}>
+        {repositories.map(({ id, name, owner, updatedAt, url, stars }) => (
+          <Repository
+            key={id}
+            owner={owner}
+            name={name}
+            url={url}
+            updatedAt={new Date(updatedAt)}
+            stars={stars}
+          />
+        ))}
+      </div>
 
       {!isTotalLoading && (
         <Pagination
@@ -60,7 +72,7 @@ const MainPage = () => {
           total={Math.ceil(total / PAGE_SIZE)}
         />
       )}
-    </div>
+    </main>
   );
 };
 

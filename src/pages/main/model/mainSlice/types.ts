@@ -1,11 +1,9 @@
 export type Repository = {
   id: string;
   name: string;
-  owner: {
-    login: string;
-  };
+  owner: string;
   stars: number;
-  lastCommit: Date;
+  updatedAt: string;
   url: string;
 };
 

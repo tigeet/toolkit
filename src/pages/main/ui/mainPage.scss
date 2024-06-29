@@ -1,0 +1,12 @@
+.mainPage {
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+  &-list {
+    flex: 1 1 auto;
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+    padding: 12px;
+  }
+}

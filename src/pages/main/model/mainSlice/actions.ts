@@ -42,7 +42,7 @@ export const fetchPageThunk = createAsyncThunk<
   { state: RootState }
 >("main/fetchNextPage", async (_, thunkAPI) => {
   const state = thunkAPI.getState();
-  
+
   const query = await createQuery(selectSearch(state));
   const cursor = await fetchCursorWithOffset(query, state);
 
@@ -61,9 +61,29 @@ export const fetchPageThunk = createAsyncThunk<
   } = data.search;
   console.log(startCursor, endCursor);
   return {
-    repositories: repos.map((entry: { repo: object }) => ({
-      ...entry.repo,
-    })),
+    repositories: repos.map(
+      (entry: {
+        repo: {
+          id: string;
+          name: string;
+          owner: { login: string };
+          start: number;
+          url: string;
+          defaultBranchRef: {
+            target: {
+              history: { edges: { node: { committedDate: string } }[] };
+            };
+          };
+        };
+      }) => ({
+        ...entry.repo,
+        defaultBranchRef: {},
+        owner: entry.repo.owner.login,
+        updatedAt:
+          entry.repo.defaultBranchRef.target.history.edges[0].node
+            .committedDate,
+      })
+    ),
     endCursor: endCursor as string,
     startCursor: startCursor as string,
   };
