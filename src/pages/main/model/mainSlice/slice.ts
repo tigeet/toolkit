@@ -38,6 +38,7 @@ export const mainSlice = createSlice({
         state.repositories = action.payload.repositories;
         state.endCursor = action.payload.endCursor;
         state.startCursor = action.payload.startCursor;
+        state.previousPage = state.page;
         state.loading = false;
       });
   },

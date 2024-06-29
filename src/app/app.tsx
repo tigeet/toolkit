@@ -5,15 +5,18 @@ import router from "./router/";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./apollo";
 import { Provider } from "react-redux";
-import { store } from "./store";
+import { persistor, store } from "./store";
 
 import "./styles.scss";
+import { PersistGate } from "redux-persist/integration/react";
 const App = () => {
   return (
     <Provider store={store}>
-      <ApolloProvider client={client}>
-        <RouterProvider router={router} />
-      </ApolloProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <ApolloProvider client={client}>
+          <RouterProvider router={router} />
+        </ApolloProvider>
+      </PersistGate>
     </Provider>
   );
 };

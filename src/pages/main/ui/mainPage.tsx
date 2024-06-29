@@ -5,11 +5,7 @@ import { Pagination } from "@features/pagination";
 import { PAGE_SIZE } from "../const";
 import { fetchRepositoryCount } from "../model/countSlice/actions";
 import { fetchPageThunk } from "../model/mainSlice/actions";
-import {
-  selectRepositories,
-  selectPage,
-  selectSearch,
-} from "../model/mainSlice/selector";
+import { selectRepositories } from "../model/mainSlice/selector";
 import { setSearch, setPage } from "../model/mainSlice/slice";
 import { selectTotal } from "../model/countSlice/selector";
 import { Search } from "@features/search/ui/search/search";
@@ -19,38 +15,48 @@ import "./mainPage.scss";
 const cl = cn("mainPage");
 const MainPage = () => {
   const dispatch = useAppDispatch();
-  const { loading: areRepositoriesLoading, repositories } =
-    useAppSelector(selectRepositories);
+  const {
+    loading: areRepositoriesLoading,
+    repositories,
+    page,
+    previousPage,
+    search,
+  } = useAppSelector(selectRepositories);
   const { total, loading: isTotalLoading } = useAppSelector(selectTotal);
 
-  const page = useAppSelector(selectPage);
-  const search = useAppSelector(selectSearch);
-
+  const fetchPage = useCallback(() => {
+    if (page === previousPage) return;
+    dispatch(fetchPageThunk());
+  }, [dispatch, page, previousPage]);
   useEffect(() => {
     dispatch(fetchRepositoryCount());
-    dispatch(fetchPageThunk());
-  }, [dispatch]);
+    fetchPage();
+  }, [dispatch, fetchPage]);
 
   const handleSearchChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       dispatch(setSearch(event.target.value));
       dispatch(fetchRepositoryCount());
-      dispatch(fetchPageThunk());
+      fetchPage();
     },
-    [dispatch]
+    [dispatch, fetchPage]
   );
   const handlePageChange = useCallback(
     (page: number) => {
       if (areRepositoriesLoading) return;
       dispatch(setPage(page));
-      dispatch(fetchPageThunk());
+      fetchPage();
     },
-    [areRepositoriesLoading, dispatch]
+    [areRepositoriesLoading, dispatch, fetchPage]
   );
 
   return (
     <main className={cl()}>
-      <Search value={search} onChange={handleSearchChange} className={cl('search')} />
+      <Search
+        value={search}
+        onChange={handleSearchChange}
+        className={cl("search")}
+      />
 
       <div className={cl("list")}>
         {repositories.map(({ id, name, owner, updatedAt, url, stars }) => (

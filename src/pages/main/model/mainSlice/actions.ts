@@ -6,7 +6,6 @@ import { RootState } from "@app/store";
 import { GET_CURSOR_WITH_OFFSET, GET_REPOSITORIES } from "@pages/main/api";
 import { PAGE_SIZE } from "@pages/main/const";
 import { createQuery } from "../actions";
-import { selectSearch } from "./selector";
 
 async function fetchCursorWithOffset(query: string | null, state: RootState) {
   if (!state.main.previousPage) return null;
@@ -43,7 +42,7 @@ export const fetchPageThunk = createAsyncThunk<
 >("main/fetchNextPage", async (_, thunkAPI) => {
   const state = thunkAPI.getState();
 
-  const query = await createQuery(selectSearch(state));
+  const query = await createQuery(state.main.search);
   const cursor = await fetchCursorWithOffset(query, state);
 
   const { data } = await client.query({
@@ -59,7 +58,6 @@ export const fetchPageThunk = createAsyncThunk<
     repos,
     pageInfo: { endCursor, startCursor },
   } = data.search;
-  console.log(startCursor, endCursor);
   return {
     repositories: repos.map(
       (entry: {

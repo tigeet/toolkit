@@ -3,7 +3,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "@app/store";
 import { createQuery } from "../actions";
 import { GET_REPOSITORIES_COUNT } from "@pages/main/api";
-import { selectSearch } from "../mainSlice/selector";
 
 export const fetchRepositoryCount = createAsyncThunk<
   number,
@@ -11,7 +10,7 @@ export const fetchRepositoryCount = createAsyncThunk<
   { state: RootState }
 >("main/fetchFirstPage", async (_, thunkAPI) => {
   const state = thunkAPI.getState();
-  const query = await createQuery(selectSearch(state));
+  const query = await createQuery(state.main.search);
   const { data } = await client.query({
     query: GET_REPOSITORIES_COUNT,
     variables: {
