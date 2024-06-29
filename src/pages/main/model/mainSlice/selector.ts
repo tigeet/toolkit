@@ -1,9 +1,12 @@
 import { RootState } from "@app/store";
-
-export const selectRepositories = (state: RootState) => ({
-  repositories: state.main.repositories,
-  loading: state.main.loading,
-});
+import { createSelector } from "reselect";
 
 export const selectSearch = (state: RootState) => state.main.search;
 export const selectPage = (state: RootState) => state.main.page;
+const selectLoading = (state: RootState) => state.main.loading;
+const selectRepositoriesList = (state: RootState) => state.main.repositories;
+
+export const selectRepositories = createSelector(
+  [selectLoading, selectRepositoriesList],
+  (loading, repositories) => ({ loading, repositories })
+);
