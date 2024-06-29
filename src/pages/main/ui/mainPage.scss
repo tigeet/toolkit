@@ -1,12 +1,20 @@
 .mainPage {
   display: flex;
+  padding: 12px;
+  gap: 24px;
+  align-items: center;
   min-height: 100dvh;
   flex-direction: column;
+
+  &-search {
+    width: 100%;
+  }
+
   &-list {
+    width: 100%;
     flex: 1 1 auto;
     display: flex;
     gap: 12px;
     flex-direction: column;
-    padding: 12px;
   }
 }

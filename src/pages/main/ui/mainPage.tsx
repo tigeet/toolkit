@@ -50,7 +50,7 @@ const MainPage = () => {
 
   return (
     <main className={cl()}>
-      <Search value={search} onChange={handleSearchChange} />
+      <Search value={search} onChange={handleSearchChange} className={cl('search')} />
 
       <div className={cl("list")}>
         {repositories.map(({ id, name, owner, updatedAt, url, stars }) => (

@@ -2,6 +2,7 @@ import { cn } from "@bem-react/classname";
 import "./search.scss";
 import { ChangeEvent, ChangeEventHandler, useMemo, useState } from "react";
 import SearchIcon from "@shared/assets/search.svg?react";
+import clsx from "clsx";
 
 const debounced = <T,>(fn: (value: T) => void) => {
   let id: number | null = null;
@@ -18,9 +19,10 @@ type Props = {
   value: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
+  className?: string;
 };
 
-const Search = ({ value, onChange, placeholder }: Props) => {
+const Search = ({ value, onChange, placeholder, className }: Props) => {
   const [displayValue, setDisplayValue] = useState(value);
   const [focus, setFocus] = useState(false);
 
@@ -31,7 +33,7 @@ const Search = ({ value, onChange, placeholder }: Props) => {
     debouncedOnChange(e);
   };
   return (
-    <div className={cl({ focus })}>
+    <div className={clsx(className, cl({ focus }))}>
       <SearchIcon className={cl("icon")} />
       <input
         onFocus={() => setFocus(true)}
