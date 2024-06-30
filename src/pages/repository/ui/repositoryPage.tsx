@@ -40,7 +40,9 @@ const RepositoryPage = () => {
         {loading ? (
           <Skeleton height={30} width={120} />
         ) : (
-          <h1 className={cl("name")}>{name}</h1>
+          <h1 className={cl("name")} data-testid="repositoryPage__name">
+            {name}
+          </h1>
         )}
 
         <div className={cl("repoStats")}>
@@ -71,7 +73,11 @@ const RepositoryPage = () => {
         {loading ? (
           <Skeleton height={20} width={120} />
         ) : (
-          <Link to={ownerUrl} target="_blank">
+          <Link
+            to={ownerUrl}
+            target="_blank"
+            data-testid="repositoryPage__login"
+          >
             <span className={cl("owner")}>{login}</span>
           </Link>
         )}
@@ -84,10 +90,18 @@ const RepositoryPage = () => {
             loading ? (
               <Skeleton width="100%" height={50} />
             ) : (
-              <span className={cl("descriptionContent")}>{description}</span>
+              <span
+                className={cl("descriptionContent")}
+                data-testid="repositoryPage__description"
+              >
+                {description}
+              </span>
             )
           ) : (
-            <span className={cl("descriptionEmpty")}>
+            <span
+              className={cl("descriptionEmpty")}
+              data-testid="repositoryPage__description-empty"
+            >
               No description provided
             </span>
           )}
