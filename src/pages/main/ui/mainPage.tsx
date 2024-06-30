@@ -1,4 +1,8 @@
-import { useAppDispatch, useAppSelector } from "@shared/model/hooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useDebouncedDispatch,
+} from "@shared/model/hooks";
 import { ChangeEvent, useCallback, useEffect } from "react";
 import { Pagination } from "@features/pagination";
 import { PAGE_SIZE } from "../const";
@@ -31,23 +35,26 @@ const MainPage = () => {
   const count = useAppSelector(selectCount);
   const isTotalLoading = useAppSelector(selectCountLoading);
 
+  const dispatchFetchPage = useDebouncedDispatch();
+  const dispatchFetchCount = useDebouncedDispatch();
   const fetchPage = useCallback(() => {
     if (page === previousPage) return;
-    dispatch(fetchPageThunk());
-  }, [dispatch, page, previousPage]);
+    dispatchFetchPage(fetchPageThunk());
+  }, [dispatchFetchPage, page, previousPage]);
 
   useEffect(() => {
-    dispatch(fetchRepositoryCount());
+    dispatchFetchCount(fetchRepositoryCount());
     fetchPage();
-  }, [dispatch, fetchPage]);
+  }, [dispatch, dispatchFetchCount, fetchPage]);
 
   const handleSearchChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       dispatch(setSearch(event.target.value));
-      dispatch(fetchRepositoryCount());
+
+      dispatchFetchCount(fetchRepositoryCount());
       fetchPage();
     },
-    [dispatch, fetchPage]
+    [dispatch, dispatchFetchCount, fetchPage]
   );
 
   const handlePageChange = useCallback(
@@ -65,6 +72,7 @@ const MainPage = () => {
         value={search}
         onChange={handleSearchChange}
         className={cl("search")}
+        placeholder="Search"
       />
 
       <div className={cl("list")}>

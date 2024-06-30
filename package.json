@@ -7,13 +7,16 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:e2e": "npx playwright test && npx playwright show-report",
+    "test:e2e:ui": "npx playwright test --ui"
   },
   "dependencies": {
     "@apollo/client": "^3.10.8",
     "@bem-react/classname": "^1.6.0",
     "@reduxjs/toolkit": "^2.2.5",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.5",
     "graphql": "^16.9.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -27,6 +30,7 @@
     "@conarti/eslint-plugin-feature-sliced": "^1.0.5",
     "@eslint/js": "^9.6.0",
     "@feature-sliced/eslint-config": "^0.1.1",
+    "@playwright/test": "^1.45.0",
     "@types/node": "^20.14.9",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

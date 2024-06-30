@@ -34,7 +34,12 @@ export const Repository = memo(
         </div>
 
         <div>
-          <Link className={cl("githubLink")} to={url} target="_blank">
+          <Link
+            className={cl("githubLink")}
+            to={url}
+            target="_blank"
+            title="View on github"
+          >
             <GithubIcon className={cl("githubIcon")} />
           </Link>
         </div>
