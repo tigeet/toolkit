@@ -1,4 +1,4 @@
-export type Repository = {
+export type TRepository = {
   id: string;
   name: string;
   owner: string;
@@ -14,5 +14,5 @@ export type State = {
   previousPage: number | null;
   endCursor: string | null;
   startCursor: string | null;
-  repositories: Repository[];
+  repositories: TRepository[];
 };

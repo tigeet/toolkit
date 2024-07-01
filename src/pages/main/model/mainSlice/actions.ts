@@ -1,7 +1,7 @@
 import { client } from "@app/apollo";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { Repository } from "./types";
+import { TRepository } from "./types";
 import { RootState } from "@app/store";
 import { GET_CURSOR_WITH_OFFSET, GET_REPOSITORIES } from "@pages/main/api";
 import { PAGE_SIZE } from "@pages/main/const";
@@ -42,7 +42,7 @@ async function fetchCursorWithOffset(query: string | null, state: RootState) {
 
 export const fetchPageThunk = createAsyncThunk<
   {
-    repositories: Repository[];
+    repositories: TRepository[];
     endCursor: string;
     startCursor: string;
   },

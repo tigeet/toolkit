@@ -5,24 +5,26 @@ import {
 } from "@shared/model/hooks";
 import { ChangeEvent, useCallback, useEffect } from "react";
 import { Pagination } from "@features/pagination";
-import { PAGE_SIZE } from "../const";
-import { fetchRepositoryCount } from "../model/countSlice/actions";
-import { fetchPageThunk } from "../model/mainSlice/actions";
+import { PAGE_SIZE } from "../../const";
+import { fetchRepositoryCount } from "../../model/countSlice/actions";
+import { fetchPageThunk } from "../../model/mainSlice/actions";
 import {
   selectPage,
   selectPreviousPage,
   selectRepositories,
   selectRepositoriesLoading,
   selectSearch,
-} from "../model/mainSlice/selector";
-import { setSearch, setPage } from "../model/mainSlice/slice";
-import { selectCount, selectCountLoading } from "../model/countSlice/selector";
+} from "../../model/mainSlice/selector";
+import { setSearch, setPage } from "../../model/mainSlice/slice";
+import {
+  selectCount,
+  selectCountLoading,
+} from "../../model/countSlice/selector";
 import { Search } from "@features/search/";
-import { Repository } from "@entities/repository";
 import { cn } from "@bem-react/classname";
 
 import "./mainPage.scss";
-import { Skeleton } from "@shared/ui/skeleton/skeleton";
+import { RepositoryList } from "../repositoryList/repositoryList";
 const cl = cn("mainPage");
 
 const MainPage = () => {
@@ -75,24 +77,9 @@ const MainPage = () => {
         placeholder="Search"
       />
 
-      <div className={cl("list")}>
-        {areRepositoriesLoading
-          ? Array(PAGE_SIZE)
-              .fill(0)
-              .map((_, i) => <Skeleton key={i} width="100%" height={77} />)
-          : repositories.map(({ id, name, owner, updatedAt, url, stars }) => (
-              <Repository
-                key={id}
-                owner={owner}
-                name={name}
-                url={url}
-                updatedAt={updatedAt}
-                stars={stars}
-              />
-            ))}
-      </div>
+      <RepositoryList />
 
-      {!isTotalLoading && (
+      {!isTotalLoading && repositories.length > 0 && (
         <Pagination
           page={page}
           onChange={handlePageChange}
