@@ -1,3 +1,5 @@
+import { SerializedError } from "@reduxjs/toolkit";
+
 export type RepositoryInfo = {
   stars: number;
   updatedAt: string;
@@ -10,6 +12,7 @@ export type RepositoryInfo = {
 
 export type State = {
   loading: boolean;
+  error?: SerializedError;
   name: string;
   owner: string;
   repository: RepositoryInfo;

@@ -1,7 +1,32 @@
 .repositoryPage {
   display: flex;
+  width: 100%;
   flex-direction: column;
   padding: 12px;
+  min-height: 100dvh;
+
+  &_hasError {
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-error {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    max-width: 250px;
+  }
+
+  &-errorImage {
+    height: 100px;
+    width: 100px;
+  }
+
+  &-errorMessage {
+    text-wrap: balance;
+    text-align: center;
+  }
 
   &-repoInfo {
     display: flex;

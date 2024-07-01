@@ -8,6 +8,7 @@ const initialState: State = {
   loading: false,
   name: "",
   owner: "",
+  error: undefined,
   repository: {
     stars: 0,
     updatedAt: "",
@@ -48,6 +49,7 @@ export const fetchRepositoryThunk = createAsyncThunk<
   };
   return result;
 });
+
 export const repositorySlice = createSlice({
   name: "repository",
   initialState,
@@ -65,11 +67,17 @@ export const repositorySlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchRepositoryThunk.pending, (state) => {
+        state.error = undefined;
         state.loading = true;
       })
       .addCase(fetchRepositoryThunk.fulfilled, (state, action) => {
         state.loading = false;
+        state.error = undefined;
         state.repository = action.payload;
+      })
+      .addCase(fetchRepositoryThunk.rejected, (state, action) => {
+        state.error = action.error;
+        state.loading = false;
       });
   },
 });

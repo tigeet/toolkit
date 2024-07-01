@@ -2,7 +2,11 @@ import { useAppDispatch, useAppSelector } from "@shared/model/hooks";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchRepositoryThunk, reset } from "../model/slice";
-import { selectLoading, selectRepositoryInfo } from "../model/selector";
+import {
+  selectError,
+  selectLoading,
+  selectRepositoryInfo,
+} from "../model/selector";
 import { cn } from "@bem-react/classname";
 import { LANGAUGES_LIMIT } from "../const";
 import { Dot, Link, UpdatedAt, Stars } from "@shared/ui/";
@@ -16,6 +20,7 @@ const RepositoryPage = () => {
   const dispatch = useAppDispatch();
   const {
     description,
+
     ownerUrl,
     avatarUrl,
     stars,
@@ -23,6 +28,7 @@ const RepositoryPage = () => {
     languages,
     totalLanguages,
   } = useAppSelector(selectRepositoryInfo);
+  const error = useAppSelector(selectError);
   const loading = useAppSelector(selectLoading);
 
   useEffect(() => {
@@ -34,8 +40,25 @@ const RepositoryPage = () => {
     };
   }, [dispatch, login, name]);
 
+  if (error) {
+    return (
+      <main className={cl({ hasError: Boolean(error) })}>
+        <div className={cl("error")}>
+          <img
+            className={cl("errorImage")}
+            src="/sad-emoji-2.png"
+            alt="sad emoji"
+          />
+          <span className={cl("errorMessage")}>{error.message}</span>
+          <Link to="/" className={cl("errorLink")}>
+            Back to homepage
+          </Link>
+        </div>
+      </main>
+    );
+  }
   return (
-    <div className={cl()}>
+    <main className={cl()}>
       <div className={cl("repoInfo")}>
         {loading ? (
           <Skeleton height={30} width={120} />
@@ -132,7 +155,7 @@ const RepositoryPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
