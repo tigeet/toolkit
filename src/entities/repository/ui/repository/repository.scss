@@ -32,6 +32,8 @@
 
   &-githubLink {
     position: relative;
+    display: inline-block;
+
     &::before {
       position: absolute;
       content: "";
