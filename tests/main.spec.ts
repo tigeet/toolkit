@@ -26,6 +26,13 @@ test("pagination works with empty search", async ({ page }) => {
   await expect(page.getByText("contribute")).toBeVisible();
 });
 
+test("show empty message if no results found", async ({ page }) => {
+  await page.getByPlaceholder("Search").fill("jfdakjfadlksjfaslkfjskl");
+  await expect(
+    page.getByText("По вашему запросу ничего не найдено")
+  ).toBeVisible();
+});
+
 test("navigate to github works", async ({ page }) => {
   const newTabPromise = page.waitForEvent("popup");
   await page.getByTitle("View on github").nth(0).click();
