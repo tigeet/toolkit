@@ -1,6 +1,12 @@
 .link {
   color: #4493f8;
-  &:hover {
+  @media (hover: hover) {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &:active {
     text-decoration: underline;
   }
 }

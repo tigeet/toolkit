@@ -14,12 +14,26 @@
     padding: 0 8px;
     cursor: pointer;
 
-    &:hover {
+    @media (hover: hover) {
+      &:hover {
+        background-color: hsla(0, 0%, 0%, 0.089);
+      }
+    }
+
+    &:active {
       background-color: hsla(0, 0%, 0%, 0.089);
     }
+
     &_selected {
       background-color: hsla(0, 0%, 0%, 0.185);
-      &:hover {
+
+      @media (hover: hover) {
+        &:hover {
+          background-color: hsla(0, 0%, 0%, 0.185);
+        }
+      }
+
+      &:active {
         background-color: hsla(0, 0%, 0%, 0.185);
       }
     }
@@ -41,13 +55,21 @@
     cursor: pointer;
     background-color: transparent;
     transition: background-color 0.3s ease;
-    &:hover {
+    @media (hover: hover) {
+      &:hover {
+        background-color: hsla(0, 0%, 0%, 0.089);
+      }
+    }
+
+    &:active {
       background-color: hsla(0, 0%, 0%, 0.089);
     }
+
     &_disabled {
       cursor: initial;
       color: rgb(172, 172, 172);
-      &:hover {
+      &:hover,
+      &:active {
         background-color: transparent;
       }
     }

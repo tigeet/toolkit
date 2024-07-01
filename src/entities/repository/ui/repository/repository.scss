@@ -45,7 +45,13 @@
       z-index: 1;
       border-radius: 50%;
     }
-    &:hover::before {
+    @media (hover: hover) {
+      &:hover::before {
+        background-color: hsla(0, 0%, 0%, 0.089);
+      }
+    }
+
+    &:active::before {
       background-color: hsla(0, 0%, 0%, 0.089);
     }
   }
